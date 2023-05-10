@@ -20,5 +20,6 @@ public class GameService {
 		List<GameMinDTO> gameDto = result.stream().map(x -> new GameMinDTO(x)).toList();
 		
 		return gameDto;
+
 	}
 }
