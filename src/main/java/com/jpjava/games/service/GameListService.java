@@ -32,20 +32,19 @@ public class GameListService {
 	
 	}
 	
-	@Transactional //		2				1					3
+	@Transactional //		2				3					1
 	public void move (Long listId, int sourceIndex, int destinationIndex) {
 		
-		List<GameMinProjection> list = gameRepository.searchByList(listId);
+		List<GameMinProjection> list = gameRepository.searchByList(listId); //busco a lista por id
 		
-		GameMinProjection obj = list.remove(sourceIndex);
-		list.add(destinationIndex, obj);
+		GameMinProjection obj = list.remove(sourceIndex); //remove
+		list.add(destinationIndex, obj); // add no destino
 		
-		System.out.println(list);
-		
-		int min = sourceIndex < destinationIndex ? sourceIndex : destinationIndex;
+		//define min e max para por em ordem
+		int min = sourceIndex < destinationIndex ? sourceIndex : destinationIndex; 
 		int max = sourceIndex < destinationIndex ? destinationIndex : sourceIndex; 
 		
-		for (int i = min; i <= max; i++) {
+		for (int i = min; i <= max; i++) { // pego todos os index e atualizo no banco 
 			
 			gameListRepository.updateBelongingPosition(listId, list.get(i).getId(), i);
 		}
