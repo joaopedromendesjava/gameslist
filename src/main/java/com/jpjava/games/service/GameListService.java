@@ -41,8 +41,17 @@ public class GameListService {
 		list.add(destinationIndex, obj); // add no destino
 		
 		//define min e max para por em ordem
-		int min = sourceIndex < destinationIndex ? sourceIndex : destinationIndex; 
-		int max = sourceIndex < destinationIndex ? destinationIndex : sourceIndex; 
+		int min;
+		int max;
+				
+		if (sourceIndex < destinationIndex) {
+			 min = sourceIndex;
+			 max = destinationIndex;
+			 
+		}else {
+			max = sourceIndex;
+			min = destinationIndex;
+		}
 		
 		for (int i = min; i <= max; i++) { // pego todos os index e atualizo no banco 
 			
